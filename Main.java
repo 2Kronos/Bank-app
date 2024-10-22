@@ -4,34 +4,48 @@ import java.util.Scanner;
 
 public class Main {
 
-public static void menu({})
+
 	public static void main(String[] args) {
-	// TODO Auto-generated method stub
-			Scanner input = new Scanner(System.in);
-			Account bank = new Account();
-			
-			
-			System.out.printf("Pick an option \n1. Deposit \n 2. Withdraw");
-			int option = input.nextInt();
+	try (Scanner input = new Scanner(System.in)) {
+					Account bank = new Account();
+					Prompts message = new Prompts();
+					boolean exit = false;
+					message.menu();
+					int option = input.nextInt();
 
+			while (!exit) {
 		
-// Deposit
-			if (option == 1) {
-				System.out.println("Enter the amount you want to deposit");
-				int depositAmount = input.nextInt();
-				bank.credit(depositAmount); 
-			}
-// Withdraw
-			else if (option == 2) {
-				System.out.println("Enter the amount you want to withdraw");
-				int withdrawAmount = input.nextInt();
-			bank.debit(withdrawAmount);
-			}
-// Invalid option
-			else {
-				System.out.println("Invalid option");
+	// Deposit
+					switch (option) {
+						case 1:
+							System.out.println("Enter the amount");
+							int depositAmount = input.nextInt();
+							bank.credit(depositAmount); 
+							message.miniMenu();
+							break;
+	// Withdraw						
+						case 2:
+						System.out.println("Enter the amount");
+						int withdrawAmount = input.nextInt();
+						bank.debit(withdrawAmount);
+						message.miniMenu();
+						break;
+	// Balance Inquiry
+						case 3:
+						System.out.printf("Balance: %n", bank.getBalance());
+						message.miniMenu();
+						break;
+			
+	// Invalid option
+					default:
+						System.out.println("Invalid option");
+						message.menu();
+						break;
+					}
+				
 			}	
-		
-	}
+			
+		}
 
+	}
 }

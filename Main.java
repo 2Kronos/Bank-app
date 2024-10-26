@@ -12,6 +12,7 @@ public class Main {
 			Authentication auth = new Authentication();
 			Console console = System.console();
 			
+			
 			// Sign-up process
 			System.out.println("Create a username:");
 			String username = input.nextLine();
